@@ -1,0 +1,33 @@
+import java.util.*;
+public class OptionalConcept {
+    public static void main(String[] args) {
+        Student  student = Optional.ofNullable(getStudentWithName("hamza1")).orElse(new Student("no one", 0, "Unknown"));
+            System.out.println(student.getName());
+    }
+
+    public  static Student  getStudentWithName(String name ){
+        // lets suppose that our database contain only 2 students ahmed and hamza .
+        if (name.equals("hamza") || name.equals("ahmed")) {
+            return new Student(name , 22 , "Morocco");
+        } else {
+            return null ;
+        }
+    }
+
+}
+
+class Student{
+    private String name;
+    private int age;
+    private String city;
+     
+    Student(String name,int age,String city){
+        this.name=name;
+        this.age=age;
+        this.city=city;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+}
