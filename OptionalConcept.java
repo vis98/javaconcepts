@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class OptionalConcept {
+    public static void main(String[] args) {
+        try {
+            /* Student student = Optional.ofNullable(getStudentWithName("hamza1")).orElse(new Student("no one", 0, "Unknown"));
+               System.out.println(student.getName()); */
+            Student student = Optional.ofNullable(getStudentWithName("fs"))
+                                       .orElseThrow(() -> new StudentNotFoundException("The Student is not present"));
+            System.out.println(student.getName());
+        } catch (StudentNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static Student getStudentWithName(String name) {
+        // Let's suppose that our database contains only 2 students: Ahmed and Hamza.
+        if (name.equals("hamza") || name.equals("ahmed")) {
+            return new Student(name, 22, "Morocco");
+        } else {
+            return null;
+        }
+    }
+}
+
+class Student {
+    private String name;
+    private int age;
+    private String city;
+
+    Student(String name, int age, String city) {
+        this.name = name;
+        this.age = age;
+        this.city = city;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+}
+
+class StudentNotFoundException extends RuntimeException {
+    StudentNotFoundException(String message) {
+        super(message);
+    }
+}
